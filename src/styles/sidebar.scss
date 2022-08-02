@@ -37,6 +37,7 @@
     .el-scrollbar {
       background-color: #fff;
       height: 100%;
+      
     }
 
     &.has-logo {
@@ -53,6 +54,7 @@
       display: inline-block;
       width: 100%;
       overflow: hidden;
+      
     }
 
     .svg-icon {
@@ -69,14 +71,27 @@
       border: none;
       height: 100%;
       width: 100% !important;
+      
     }
 
     // menu hover
     .submenu-title-noDropdown,
     .el-submenu__title {
+      
       &:hover {
         background-color: $menuHover !important;
       }
+    }
+    // 更改menu-item样式
+    .el-submenu .el-menu {
+      span {
+        color: #999;
+      }
+    }
+    .el-menu-item.is-active{
+        span {
+          color: #409EFF ;
+        }
     }
 
     .is-active>.el-submenu__title {
@@ -85,6 +100,7 @@
 
     & .nest-menu .el-submenu>.el-submenu__title,
     & .el-submenu .el-menu-item {
+      // color: #999 !important;
       min-width: $sideBarWidth !important;
       background-color: $subMenuBg !important;
 
@@ -121,10 +137,12 @@
     }
 
     .el-submenu {
+      
       overflow: hidden;
 
       &>.el-submenu__title {
         padding: 0 !important;
+      color: #99a9bf !important;
 
         .svg-icon {
           margin-left: 20px;
@@ -156,6 +174,7 @@
   }
 
   .el-menu--collapse .el-menu .el-submenu {
+    
     min-width: $sideBarWidth !important;
   }
 
@@ -191,6 +210,7 @@
 // when menu collapsed
 .el-menu--vertical {
   &>.el-menu {
+
     .svg-icon {
       margin-right: 16px;
     }
@@ -202,6 +222,7 @@
 
   .nest-menu .el-submenu>.el-submenu__title,
   .el-menu-item {
+    
     &:hover {
       // you can use $subMenuHover
       background-color: $menuHover !important;

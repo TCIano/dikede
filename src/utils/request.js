@@ -12,6 +12,8 @@ const request = axios.create({
 request.interceptors.request.use(
   // 每次请求的网络配置
   (config) => {
+    // const { data } = config.data;
+    // console.log(data);
     //获取token
     const token = store.state.user.token.token;
     console.log(token);
@@ -22,6 +24,25 @@ request.interceptors.request.use(
     return config;
   },
   // 请求失败的fanhui
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+request.interceptors.response.use(
+  (response) => {
+    if (
+      response.request.responseURL ===
+      "http://localhost:8080/api/user-service/user/login"
+    ) {
+      return response;
+    }
+    // console.log(response);
+    const { msg, success, status } = response.data;
+    if (success || status) {
+      return response.data;
+    }
+    return Promise.reject(new Error(msg));
+  },
   (error) => {
     return Promise.reject(error);
   }

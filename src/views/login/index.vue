@@ -49,7 +49,9 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button class="loginBtn" @click="login">登录</el-button>
+          <el-button class="loginBtn" @click="login" :loading="isLoad"
+            >登录</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
@@ -68,6 +70,7 @@ export default {
         clientToken: null,
         loginType: 0,
       },
+      isLoad: false,
       check: "",
       radom: "",
       rules: {
@@ -98,25 +101,14 @@ export default {
     },
     //登录
     async login() {
+      this.isLoad = true;
       try {
         // console.log(this.$refs.loginForm);
         await this.$refs.loginForm.validate();
-        this.$store.dispatch("user/getToken", this.loginForm);
-        // const res = await login(this.loginForm);
-        // if (!this.$store.state.user.token.success) {
-        //   return this.$message({
-        //     type: "warning",
-        //     message: `${this.$store.state.user.token.msg}`,
-        //   });
-        // } else {
-        //   this.$message({
-        //     type: "success",
-        //     message: "登陆成功",
-        //   });
-        //   //跳转路由
-        // this.$router.push("/dashboard");
-        // }
-      } catch (error) {}
+        await this.$store.dispatch("user/getToken", this.loginForm);
+      } finally {
+        this.isLoad = false;
+      }
     },
   },
 };

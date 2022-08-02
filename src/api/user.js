@@ -7,9 +7,6 @@ import store from "@/store";
  */
 export const getUserInfo = (id) => {
   return request({
-    // headers: {
-    //   Authentication: store.state.user.token.token,
-    // },
     url: `/user-service/user/${id}`,
   });
 };

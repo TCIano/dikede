@@ -56,6 +56,156 @@ export const constantRoutes = [
       },
     ],
   },
+  {
+    path: "/task",
+    component: Layout,
+    name: "task",
+    meta: { title: "工单管理" },
+    children: [
+      {
+        path: "business",
+        component: () => import("@/views/task"),
+        meta: { title: "运营工单" },
+      },
+      {
+        path: "operation",
+        component: () => import("@/views/task"),
+        meta: { title: "运维护工单" },
+      },
+    ],
+  },
+  {
+    path: "/node",
+    component: Layout,
+    name: "node",
+    meta: { title: "点位管理" },
+    children: [
+      {
+        path: "region",
+        component: () => import("@/views/node"),
+        meta: { title: "区域管理" },
+      },
+      {
+        path: "node",
+        component: () => import("@/views/node"),
+        meta: { title: "点位管理" },
+      },
+      {
+        path: "partner",
+        component: () => import("@/views/node"),
+        meta: { title: "合作商管理" },
+      },
+    ],
+  },
+  {
+    component: Layout,
+    path: "/device",
+    name: "device",
+    meta: { title: "设备管理" },
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/device"),
+
+        meta: { title: "设备管理" },
+      },
+      {
+        path: "status",
+        component: () => import("@/views/device"),
+
+        meta: { title: "设备状态" },
+      },
+      {
+        path: "type",
+        component: () => import("@/views/device"),
+
+        meta: { title: "设备类型管理" },
+      },
+    ],
+  },
+  {
+    path: "/human",
+    component: Layout,
+    name: "human",
+    meta: { title: "人员管理" },
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/human"),
+
+        meta: { title: "人员列表" },
+      },
+      {
+        path: "statistic",
+        component: () => import("@/views/human"),
+
+        meta: { title: "人效统计" },
+      },
+      {
+        path: "work",
+        component: () => import("@/views/human"),
+
+        meta: { title: "工作量列表" },
+      },
+    ],
+  },
+  {
+    path: "/product",
+    component: Layout,
+    name: "product",
+    meta: { title: "商品管理" },
+    children: [
+      {
+        path: "ptype",
+        component: () => import("@/views/product"),
+
+        meta: { title: "商品类型" },
+      },
+      {
+        path: "manage",
+        component: () => import("@/views/product"),
+
+        meta: { title: "商品管理" },
+      },
+    ],
+  },
+  {
+    path: "/policy",
+    component: Layout,
+    name: "policy",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/policy"),
+        meta: { title: "策略管理" },
+      },
+    ],
+  },
+  {
+    path: "/order",
+    component: Layout,
+    name: "order",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/order"),
+        meta: { title: "订单管理" },
+      },
+    ],
+  },
+  {
+    path: "/bill",
+    component: Layout,
+    redirect: "/bill/index",
+    name: "bill",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/bill"),
+        meta: { title: "对账管理" },
+      },
+    ],
+  },
 
   // 404 page must be placed at the end !!!
   { path: "*", redirect: "/404", hidden: true },
