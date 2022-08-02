@@ -26,7 +26,7 @@ export default {
           this._vm.$message.success("登录成功");
           commit("setToken", res.data);
           //跳转路由
-          router.push("/dashboard");
+          router.push("/home");
         } else {
           // throw new Error();
           this._vm.$message.error(res.data.msg);
