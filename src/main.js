@@ -8,7 +8,8 @@ import "element-ui/lib/theme-chalk/index.css";
 import locale from "element-ui/lib/locale/lang/en"; // lang i18n
 
 import "@/styles/index.scss"; // global css
-
+//引入svgcss
+import "./icons/font_3563586_fcunm76c9dl/iconfont";
 import App from "./App";
 import store from "./store";
 import router from "./router";
@@ -29,6 +30,12 @@ if (process.env.NODE_ENV === "production") {
   mockXHR();
 }
 
+// 引入自定义指令
+import * as directives from "./directives";
+//图片加载失败的自定义指令
+for (const key in directives) {
+  Vue.directive(key, directives[key]);
+}
 // set ElementUI lang to EN
 Vue.prototype.$message = Message;
 Vue.use(ElementUI, { locale });

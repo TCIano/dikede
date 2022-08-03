@@ -52,7 +52,7 @@ export const constantRoutes = [
         path: "home",
         name: "111",
         component: () => import("@/views/dashboard/index"),
-        meta: { title: "帝可得", icon: "dashboard" },
+        meta: { title: "帝可得", icon: "shouye" },
       },
     ],
   },
@@ -60,7 +60,7 @@ export const constantRoutes = [
     path: "/task",
     component: Layout,
     name: "task",
-    meta: { title: "工单管理" },
+    meta: { title: "工单管理", icon: "renwu" },
     children: [
       {
         path: "business",
@@ -78,7 +78,7 @@ export const constantRoutes = [
     path: "/node",
     component: Layout,
     name: "node",
-    meta: { title: "点位管理" },
+    meta: { title: "点位管理", icon: "dianwei" },
     children: [
       {
         path: "region",
@@ -101,7 +101,7 @@ export const constantRoutes = [
     component: Layout,
     path: "/device",
     name: "device",
-    meta: { title: "设备管理" },
+    meta: { title: "设备管理", icon: "icon" },
     children: [
       {
         path: "index",
@@ -127,7 +127,7 @@ export const constantRoutes = [
     path: "/human",
     component: Layout,
     name: "human",
-    meta: { title: "人员管理" },
+    meta: { title: "人员管理", icon: "renyuan" },
     children: [
       {
         path: "index",
@@ -153,7 +153,7 @@ export const constantRoutes = [
     path: "/product",
     component: Layout,
     name: "product",
-    meta: { title: "商品管理" },
+    meta: { title: "商品管理", icon: "shangpin" },
     children: [
       {
         path: "ptype",
@@ -177,7 +177,7 @@ export const constantRoutes = [
       {
         path: "index",
         component: () => import("@/views/policy"),
-        meta: { title: "策略管理" },
+        meta: { title: "策略管理", icon: "celve" },
       },
     ],
   },
@@ -189,7 +189,7 @@ export const constantRoutes = [
       {
         path: "index",
         component: () => import("@/views/order"),
-        meta: { title: "订单管理" },
+        meta: { title: "订单管理", icon: "dingdan" },
       },
     ],
   },
@@ -202,7 +202,7 @@ export const constantRoutes = [
       {
         path: "index",
         component: () => import("@/views/bill"),
-        meta: { title: "对账管理" },
+        meta: { title: "对账管理", icon: "zhangdan" },
       },
     ],
   },
