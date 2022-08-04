@@ -1,16 +1,18 @@
 #app {
-
+  display: flex;
   .main-container {
     display: flex;
     min-height: 100%;
     transition: margin-left .28s;
     // margin-left: $sideBarWidth;
     position: relative;
-  
+    // margin: 10px;
+    // padding: 20px;
 
   .sidebar-container {
     transition: width 0.28s;
-    width: $sideBarWidth !important;
+    // width: $sideBarWidth !important;
+    
     // width: 200px;
     background-color: $menuBg;
     // height: 100%;
@@ -18,9 +20,9 @@
     font-size: 0px;
     // top: 0;
     // bottom: 0;
-    // left: 0;
+    left: 0;
     z-index: 1001;
-    // overflow: hidden;
+    overflow: hidden;
     // background-color: #ffffff;
     // reset element-ui css
     .horizontal-collapse-transition {
@@ -28,6 +30,8 @@
     }
 
     .scrollbar-wrapper {
+      // width: 100%;
+      // width: 200px;
       overflow-x: hidden !important;
     }
 
@@ -36,6 +40,7 @@
     }
 
     .el-scrollbar {
+      width: 154px;
       background-color: #fff;
       height: 100%;
       

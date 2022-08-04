@@ -49,17 +49,19 @@ request.interceptors.request.use(
 );
 request.interceptors.response.use(
   (response) => {
+    console.log(response);
     if (
       response.request.responseURL ===
       "http://localhost:8080/api/user-service/user/login"
     ) {
       return response;
     }
-    // console.log(response);
+
     const { msg, success, status } = response.data;
-    if (success || status) {
+    if (success || status || response.status === 200) {
       return response.data;
     }
+
     Message.error(msg);
     return Promise.reject(new Error(msg));
   },
