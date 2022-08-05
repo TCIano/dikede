@@ -1,39 +1,24 @@
 <template>
   <div>
-    <input-form>
-      <template>
-        <el-form-item label="工单编号">
-          <el-input placeholder="请输入"></el-input>
-        </el-form-item>
-        <el-form-item label="工单状态">
-          <el-select placeholder="请选择">
-            <el-option label="区域一"></el-option>
-            <!-- <el-option label="区域二" value="beijing"></el-option> -->
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary">查询</el-button>
-        </el-form-item>
-      </template>
+    <input-form :option="option" @searchContionTask="searchContionTask">
     </input-form>
     <form-item :tableData="taskList" :tableHead="tableHead">
       <btn></btn>
       <el-button type="primary" class="setting">工单配置</el-button>
       <template #page>
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="totalPage"
-          @next-click="nextClick"
-          @prev-click="prevClick"
-        >
-        </el-pagination>
+        <!-- //分页 -->
+        <pageItem
+          :pageInfo="pageInfo"
+          @prevClick="prevClick"
+          @nextClick="nextClick"
+        ></pageItem>
       </template>
     </form-item>
   </div>
 </template>
 
 <script>
+import pageItem from "@/components/pageItem";
 import { searchTask } from "@/api";
 import InputForm from "@/components/InputFrom";
 import FormItem from "@/components/form";
@@ -43,14 +28,18 @@ export default {
     InputForm,
     FormItem,
     btn,
+    pageItem,
   },
   data() {
     return {
       //表格数据
       taskList: [],
-      pageIndex: null, //页数
-      totalPage: null, //总页数
-      //表頭數據
+      pageInfo: {
+        pageIndex: 1, //页数
+        totalPage: null, //总页数
+        totalCount: null,
+      },
+      //表头数据
       tableHead: [
         {
           column_name: "taskCode",
@@ -61,12 +50,12 @@ export default {
           column_comment: "设备编号",
         },
         {
-          column_name: "taskType.typeName",
-          column_comment: "工单类型",
-        },
-        {
           column_name: "createType",
           column_comment: "工单方式",
+        },
+        {
+          column_name: "taskType.typeName",
+          column_comment: "工单类型",
         },
         {
           column_name: `taskStatusTypeEntity.statusName`,
@@ -81,6 +70,21 @@ export default {
           column_comment: "创建日期",
         },
       ],
+      //选项数据
+      option: [
+        {
+          label: "代办",
+        },
+        {
+          label: "进行",
+        },
+        {
+          label: "取消",
+        },
+        {
+          label: "完成",
+        },
+      ],
     };
   },
   methods: {
@@ -88,37 +92,48 @@ export default {
       console.log("submit!");
     },
     //获取工单
-    async searchTask() {
-      const res = await searchTask();
-      console.log(res);
-      this.pageIndex = parseInt(res.pageIndex);
-      this.totalPage = parseInt(res.totalPage);
-      console.log(this.totalPage);
-      console.log(this.pageIndex);
+    async searchTask(contion) {
+      const res = await searchTask(contion);
+      res.currentPageRecords.forEach((item) => {
+        if (item.createType === 0) {
+          item.createType = "自动";
+        } else {
+          item.createType = "手动";
+        }
+        item.createTime = item.createTime.replace(/-/g, ".");
+        item.createTime = item.createTime.replace(/T/g, " ");
+      });
+      console.log(res.currentPageRecords);
+      this.pageInfo.pageIndex = parseInt(res.pageIndex);
+      this.pageInfo.totalPage = parseInt(res.totalPage);
+      this.pageInfo.totalCount = parseInt(res.totalCount);
       this.taskList = res.currentPageRecords;
-      console.log(this.taskList);
+      // console.log(this.taskList);
     },
     //获取下一页
     async nextClick() {
-      const res = await searchTask({
-        pageIndex: `${this.pageIndex + 1}`,
-      });
-      console.log(res);
-      this.pageIndex = parseInt(res.pageIndex);
-      console.log(this.pageIndex);
-      this.taskList = res.currentPageRecords;
-      console.log(this.taskList);
+      // const res = await searchTask({
+      //   pageIndex: `${this.pageInfo.pageIndex + 1}`,
+      // });
+      // this.pageInfo.pageIndex = parseInt(res.pageIndex);
+
+      // this.taskList = res.currentPageRecords;
+      this.searchTask({ pageIndex: `${this.pageInfo.pageIndex + 1}` });
     },
     //上一页
     async prevClick() {
-      const res = await searchTask({
-        pageIndex: `${this.pageIndex - 1}`,
-      });
-      console.log(res);
-      this.pageIndex = parseInt(res.pageIndex);
-      console.log(this.pageIndex);
-      this.taskList = res.currentPageRecords;
-      console.log(this.taskList);
+      // const res = await searchTask({
+      //   pageIndex: `${this.pageInfo.pageIndex - 1}`,
+      // });
+      // this.pageInfo.pageIndex = parseInt(res.pageIndex);
+
+      // this.taskList = res.currentPageRecords;
+      this.searchTask({ pageIndex: `${this.pageInfo.pageIndex - 1}` });
+    },
+    //条件搜索 工单
+    searchContionTask(val) {
+      console.log(val);
+      this.searchTask(val);
     },
   },
   created() {

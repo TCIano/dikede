@@ -5,7 +5,7 @@
       class="table"
       :data="tableData"
       stripe
-      style="width: 100%"
+      style="width: 100%; text-align: center"
       header-cell-style="background:#f3f6fb"
     >
       <el-table-column prop="date" type="index" label="序号"> </el-table-column>
@@ -16,6 +16,7 @@
         :key="index"
       >
       </el-table-column>
+      <!-- <el-table-column :prop="createType" label="工单方式"> </el-table-column> -->
 
       <el-table-column fixed="right" label="操作" width="100">
         <template>
@@ -23,12 +24,19 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 分页插槽 -->
     <slot name="page" class="page"></slot>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      taskType: ["自动 ", "手动"],
+    };
+  },
   props: {
     tableData: {
       type: Array,
@@ -36,10 +44,6 @@ export default {
     tableHead: {
       type: Array,
     },
-  },
-
-  data() {
-    return {};
   },
 
   created() {},
